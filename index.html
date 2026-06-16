@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code - Context Usage</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 720px;
+    width: 100%;
+  }
+  h1 {
+    font-size: 24px;
+    color: #f0f6fc;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    color: #8b949e;
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .meter-wrapper { margin-bottom: 32px; }
+  .meter-label {
+    display: flex; justify-content: space-between;
+    font-size: 13px; margin-bottom: 6px;
+  }
+  .meter-label span:last-child { color: #8b949e; }
+  .meter {
+    height: 10px; background: #21262d; border-radius: 5px; overflow: hidden;
+  }
+  .meter-fill {
+    height: 100%; border-radius: 5px;
+    background: linear-gradient(90deg, #3fb950, #238636);
+    width: 3.5%;
+  }
+  table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 28px;
+  }
+  th, td {
+    text-align: left; padding: 10px 12px;
+    font-size: 13px; border-bottom: 1px solid #21262d;
+  }
+  th { color: #8b949e; font-weight: 500; }
+  td { color: #c9d1d9; }
+  tr:last-child td { border-bottom: none; }
+  .pct { color: #8b949e !important; font-size: 12px; }
+  h2 { font-size: 16px; color: #f0f6fc; margin-bottom: 12px; }
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    font-size: 11px; font-weight: 500;
+  }
+  .tag-model { background: #1f3a4a; color: #58a6ff; }
+  .tag-system { background: #2a1f3a; color: #bc8cff; }
+  .tag-memory { background: #1a3a2a; color: #7ee787; }
+  .tag-skills { background: #3a2a1f; color: #d29922; }
+  .tag-free   { background: #1a3a1a; color: #3fb950; }
+  .highlight {
+    background: #0d1117; border: 1px solid #30363d;
+    border-radius: 8px; padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 24px;">
+    <div style="text-align:center">
+      <div style="font-size:48px;font-weight:700;color:#3fb950;">96.5%</div>
+      <div style="font-size:13px;color:#8b949e;margin-top:4px">Free Space · 964.8k tokens available</div>
+    </div>
+  </div>
+  .meta { font-size: 11px; color: #484f58; margin-top: 20px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Claude Code Context Usage</h1>
+  <div class="subtitle">Model: claude-opus-4-8 [1M] · Tokens: 33.8k / 1m (3.5%)</div>
+
+  <div class="meter-wrapper">
+    <div class="meter-label"><span>Used 33.8k</span><span>1M total</span></div>
+    <div class="meter"><div class="meter-fill"></div></div>
+  </div>
+
+  <h2>Estimated usage by category</h2>
+  <table>
+    <thead><tr><th>Category</th><th>Tokens</th><th>Pct</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag tag-system">System prompt</span></td><td>8.7k</td><td class="pct">0.9%</td></tr>
+      <tr><td><span class="tag tag-system">System tools</span></td><td>22.4k</td><td class="pct">2.2%</td></tr>
+      <tr><td><span class="tag tag-memory">Memory files</span></td><td>1k</td><td class="pct">0.1%</td></tr>
+      <tr><td><span class="tag tag-skills">Skills</span></td><td>1.7k</td><td class="pct">0.2%</td></tr>
+      <tr><td><span class="tag tag-model">Messages</span></td><td>1.4k</td><td class="pct">0.1%</td></tr>
+      <tr><td><span class="tag tag-free">Free space</span></td><td>964.8k</td><td class="pct">96.5%</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Memory Files</h2>
+  <table>
+    <thead><tr><th>Type</th><th>Path</th><th>Tokens</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag tag-memory">User</span></td><td>~/.claude/CLAUDE.md</td><td>833</td></tr>
+      <tr><td><span class="tag tag-memory">AutoMem</span></td><td>…memory/MEMORY.md</td><td>206</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Skills (17 loaded)</h2>
+  <table>
+    <thead><tr><th>Skill</th><th>Source</th><th>Tokens</th></tr></thead>
+    <tbody>
+      <tr><td>token-saver</td><td>User</td><td>~110</td></tr>
+      <tr><td>skill-manager</td><td>User</td><td>~70</td></tr>
+      <tr><td>guizang-ppt-skill</td><td>User</td><td>~80</td></tr>
+      <tr><td>gpt-image-2-style-library</td><td>User</td><td>~110</td></tr>
+      <tr><td>deep-research</td><td>Built-in</td><td>~160</td></tr>
+      <tr><td>update-config</td><td>Built-in</td><td>~240</td></tr>
+      <tr><td>keybindings-help</td><td>Built-in</td><td>~80</td></tr>
+      <tr><td>verify</td><td>Built-in</td><td>~90</td></tr>
+      <tr><td>code-review</td><td>Built-in</td><td>~120</td></tr>
+      <tr><td>simplify</td><td>Built-in</td><td>~30</td></tr>
+      <tr><td>fewer-permission-prompts</td><td>Built-in</td><td>~60</td></tr>
+      <tr><td>loop</td><td>Built-in</td><td>~110</td></tr>
+      <tr><td>claude-api</td><td>Built-in</td><td>~250</td></tr>
+      <tr><td>run</td><td>Built-in</td><td>~120</td></tr>
+      <tr><td>init</td><td>Built-in</td><td>~20</td></tr>
+      <tr><td>review</td><td>Built-in</td><td>&lt; 20</td></tr>
+      <tr><td>security-review</td><td>Built-in</td><td>~30</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">
+    <div style="text-align:center">
+      <div style="font-size:48px;font-weight:700;color:#3fb950;">96.5%</div>
+      <div style="font-size:13px;color:#8b949e;margin-top:4px">Free Space · 964.8k tokens available</div>
+    </div>
+  </div>
+
+  <div class="meta">Generated by Claude Code · 2026-06-16</div>
+</div>
+</body>
+</html>
